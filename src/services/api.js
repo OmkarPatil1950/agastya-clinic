@@ -1,18 +1,18 @@
 import axios from 'axios';
 
-const resolveApiBase = () => {
-  if (typeof window !== 'undefined') {
-    const host = window.location.hostname;
-    if (host.endsWith('vercel.app')) return '/api';
-  }
-  const envUrl = process.env.REACT_APP_API_URL;
-  if (envUrl) return envUrl;
-  return process.env.NODE_ENV === 'production' ? '/api' : 'https://agastya-clinic-1-0-0.onrender.com/api';
-};
-const API_URL = resolveApiBase();
+// const resolveApiBase = () => {
+//   if (typeof window !== 'undefined') {
+//     const host = window.location.hostname;
+//     if (host.endsWith('vercel.app')) return '/api';
+//   }
+//   const envUrl = process.env.REACT_APP_API_URL;
+//   if (envUrl) return envUrl;
+//   return process.env.NODE_ENV = 'https://agastya-clinic-1-0-0.onrender.com/api';
+// };
+// const API_URL = resolveApiBase();
 
 const apiClient = axios.create({
-  baseURL: API_URL,
+  baseURL: "https://agastya-clinic-1-0-0.onrender.com/api",
   headers: {
     'Content-Type': 'application/json',
     'ngrok-skip-browser-warning': 'true'

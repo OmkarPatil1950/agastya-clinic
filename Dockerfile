@@ -1,28 +1,30 @@
 # ---------- Build stage ----------
-FROM node:18-alpine AS build
+FROM node:20-alpine AS build
+
 WORKDIR /app
 
 # Install dependencies
-COPY package*.json ./
+COPY package.json package-lock.json ./
 RUN npm install
-RUN npm install react-icons
 
+RUN npm install react-icons 
 # Copy source and build
 COPY . .
 RUN npm run build
 
-# ---------- Production stage ----------
+
+# ---------- Runtime stage ----------
 FROM nginx:alpine
-WORKDIR /usr/share/nginx/html
 
-# Remove default nginx static files
-RUN rm -rf ./*
+# Remove default nginx config
+RUN rm /etc/nginx/conf.d/default.conf
 
-# Copy build from previous stage
-COPY --from=build /app/build .
+# Copy our custom nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose port 80
+# Copy build output to nginx html directory
+COPY --from=build /app/build /usr/share/nginx/html
+
 EXPOSE 80
 
-# Start nginx
 CMD ["nginx", "-g", "daemon off;"]
