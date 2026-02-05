@@ -35,10 +35,10 @@ public class PatientServiceImpl implements PatientService {
             Patient patient = new Patient();
             copyDtoToEntity(dto, patient);
             return patient;
-        }).toList();
+        }).collect(Collectors.toList());
 
         List<Patient> savedPatients = patientRepository.saveAll(patients);
-        return savedPatients.stream().map(this::toDto).toList();
+        return savedPatients.stream().map(this::toDto).collect(Collectors.toList());
     }
 
 
