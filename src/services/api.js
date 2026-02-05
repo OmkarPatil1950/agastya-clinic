@@ -12,7 +12,7 @@ import axios from 'axios';
 // const API_URL = resolveApiBase();
 
 const apiClient = axios.create({
-  baseURL: "https://agastya-clinic-1-0-0.onrender.com/api",
+  baseURL: "https://agastya-clinic-1.onrender.com/api",
   headers: {
     'Content-Type': 'application/json',
     'ngrok-skip-browser-warning': 'true'
