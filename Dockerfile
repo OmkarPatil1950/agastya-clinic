@@ -6,7 +6,7 @@ COPY pom.xml .
 RUN mvn -B -e dependency:resolve
 
 COPY src ./src
-RUN mvn clean package -DskipTests
+RUN mvn clean install 
 
 # --- Package Stage ---
 FROM eclipse-temurin:11-jre
